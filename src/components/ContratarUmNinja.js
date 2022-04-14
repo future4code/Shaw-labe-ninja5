@@ -1,8 +1,12 @@
+
 import React from 'react'
 import Cards from './Cards'
 import DetailsCard from './DetailsCard'
 import axios from 'axios'
 import { Headers, BASE_URL } from "../const/Consts";
+
+
+
 export default class ContratarUmNinja extends React.Component {
   state = {
     SCRdetails: false,
@@ -16,7 +20,7 @@ export default class ContratarUmNinja extends React.Component {
   componentDidMount = () => {
     this.getAllJobs()
 }
-getAllJobs = () => {
+  getAllJobs = () => {
     const url = "https://labeninjas.herokuapp.com/jobs"
     axios
         .get(BASE_URL + "/jobs", Headers)
@@ -26,7 +30,8 @@ getAllJobs = () => {
         .catch((err) => {
             alert(err.response.data.message)
         })
-
+    
+    
 }
 screenSelect = (id) =>{
     this.setState ({SCRdetails: !this.state.SCRdetails, id: id})
@@ -42,7 +47,6 @@ selectPage = () => {
                 }
             }
 
-
   updateQuery = (e) => {
     this.setState({ filtroBuscaPorNome: e.target.value })
   }
@@ -54,20 +58,6 @@ selectPage = () => {
     this.setState({ precoMaximo: e.target.value })
   }
 
-  screenSelect = () => {
-    this.setState({ SCRdetails: !this.state.SCRdetails })
-  }
-
-  selectPage = () => {
-    switch (this.state.SCRdetails) {
-      case true:
-        return <DetailsCard screenSelect={this.screenSelect} />
-      case false:
-        return <Cards screenSelect={this.screenSelect} />
-      default:
-        return <Cards screenSelect={this.screenSelect} />
-    }
-  }
   render() {
       console.log(this.state.filtroBuscaPorNome)
     return (
@@ -120,3 +110,4 @@ selectPage = () => {
     )
   }
 }
+
