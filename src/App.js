@@ -5,10 +5,12 @@ import SerUmNinja from "./components/SerUmNinja.js"
 import ContratarUmNinja from './components/ContratarUmNinja.js'
 import Home from './components/Home.js'
 import Carrinho from './components/Carrinho.js'
+import DetailsCard from './components/DetailsCard'
 
 export default class App extends React.Component {
 	state = {
-		currentScreen: "home"
+		currentScreen: "home",
+		idJob: ''
 	}
 	
 	goToHome = () => {
@@ -20,6 +22,9 @@ export default class App extends React.Component {
 	goToContratarUmNinja = () => {
 		this.setState({currentScreen: "contratarUmNinja"})
 	}
+	goToDetailsJob = (id) => {
+		this.setState({currentScreen: "detailsJob", idJob: id})
+	}
 	goToCart = () => {
 		this.setState({currentScreen: "cart"})
 	}	
@@ -29,7 +34,9 @@ export default class App extends React.Component {
 			case "serUmNinja":
 				return <SerUmNinja/>
 			case "contratarUmNinja":
-				return <ContratarUmNinja/>
+				return <ContratarUmNinja goToDetailsJob={this.goToDetailsJob} />
+			case "detailsJob":
+				return <DetailsCard id={this.state.idJob} goToContratarUmNinja={this.goToContratarUmNinja} />
 			case "home":
 				return <Home goToSerUmNinja={this.goToSerUmNinja} goToContratarUmNinja={this.goToContratarUmNinja}/>
 			case "cart":

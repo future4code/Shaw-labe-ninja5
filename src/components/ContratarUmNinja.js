@@ -13,39 +13,26 @@ export default class ContratarUmNinja extends React.Component {
     cards: [],
     precoMinimo: '',
     precoMaximo: '',
-    filtroBuscaPorNome: '',
-    id: ""
+    filtroBuscaPorNome: ''
   }
 
   componentDidMount = () => {
     this.getAllJobs()
-}
+  }
   getAllJobs = () => {
     const url = "https://labeninjas.herokuapp.com/jobs"
     axios
-        .get(BASE_URL + "/jobs", Headers)
-        .then((res) => {
-            this.setState({ cards: res.data.jobs });
-        })
-        .catch((err) => {
-            alert(err.response.data.message)
-        })
-    
-    
-}
-screenSelect = (id) =>{
-    this.setState ({SCRdetails: !this.state.SCRdetails, id: id})
-}
-selectPage = () => {
-    switch (this.state.SCRdetails){
-        case true:
-            return <DetailsCard screenSelect={this.screenSelect} id={this.state.id}  />
-            case false:
-                return <Cards screenSelect={this.screenSelect} cards={this.state.cards} />
-                default:
-                    return <Cards screenSelect={this.screenSelect}/>
-                }
-            }
+      .get(BASE_URL + "/jobs", Headers)
+      .then((res) => {
+        this.setState({ cards: res.data.jobs });
+      })
+      .catch((err) => {
+        alert(err.response.data.message)
+      })
+
+
+  }
+
 
   updateQuery = (e) => {
     this.setState({ filtroBuscaPorNome: e.target.value })
@@ -59,7 +46,7 @@ selectPage = () => {
   }
 
   render() {
-      console.log(this.state.filtroBuscaPorNome)
+
     return (
       <div>
         <h1>ContratarUmNinja</h1>
@@ -81,7 +68,7 @@ selectPage = () => {
           onChange={this.updateMaximo}
         />
         <div>
-            
+
           {this.state.cards
             .filter((card) => {
               return card.title
@@ -95,17 +82,17 @@ selectPage = () => {
               )
             })
             .filter((card) => {
-                return (
-                  this.state.precoMaximo === "" ||
-                  card.price <= this.state.precoMaximo
-                )
-              })
-            .map((card) => {
-              return <Cards key={card.id} card={card} />
+              return (
+                this.state.precoMaximo === "" ||
+                card.price <= this.state.precoMaximo
+              )
             })
-            }
+            .map((card) => {
+              return <Cards key={card.id} card={card} goToDetailsJob={this.props.goToDetailsJob} />
+            })
+          }
         </div>
-        
+
       </div>
     )
   }

@@ -24,7 +24,7 @@ export default class DetailsCard extends React.Component {
     }
 
     render() {
-        console.log (this.state.job.paymentMethods)
+
         return (
             <div>
                 <div>
@@ -33,7 +33,7 @@ export default class DetailsCard extends React.Component {
                     {this.state.job.paymentMethods &&  this.state.job.paymentMethods.map((pay)=>{ return <p>{pay}</p> })}
                     <p>Até {this.state.job.dueDate} por {this.state.job.price}</p>
                 </div>
-                <button onClick={this.props.screenSelect}>Voltar</button>
+                <button onClick={this.props.goToContratarUmNinja}>Voltar</button>
             </div>
         )
     }
