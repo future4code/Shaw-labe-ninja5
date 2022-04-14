@@ -1,5 +1,4 @@
 import React from 'react'
-import {BASE_URL} from "./const/Consts"
 import Header from "./components/Header.js"
 import SerUmNinja from "./components/SerUmNinja.js"
 import ContratarUmNinja from './components/ContratarUmNinja.js'
